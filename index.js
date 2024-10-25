@@ -1,16 +1,12 @@
-require("dotenv").config();
-const express = require("express");
-const bodyParser = require("body-parser");
-const {
-  generateOTP,
-  storeOTP,
-  verifyOTP,
-  sendOTPSMS,
-} = require("./controllers/otpManager");
+import dotenv from "dotenv";
+import express from "express";
+import bodyParser from "body-parser";
+import otpManager from "./controllers/otpManager.js";
+const { generateOTP, storeOTP, verifyOTP, sendOTPSMS } = otpManager;
 
 const app = express();
 app.use(bodyParser.json());
-
+dotenv.config();
 // Route to request OTP via SMS
 app.post("/request-otp", async (req, res) => {
   const { phone } = req.body;
